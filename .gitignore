@@ -1,0 +1,43 @@
+# Archivos y carpetas de compilación
+bin/
+obj/
+
+# Archivos de configuración locales (IDE y entorno)
+.vs/
+.vscode/
+.idea/
+
+# Archivos de configuración de Visual Studio
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Archivos de dependencias (si usas NuGet o algún gestor de paquetes)
+packages/
+
+# Archivos de Log
+*.log
+
+# Archivos de migraciones (si no necesitas versionarlas)
+Migrations/
+
+# Archivos de contexto y bases de datos (si no necesitas versionarlas)
+Context/
+
+# Archivos de pruebas (si existen y no deben ser versionados)
+TestResults/
+
+# Archivos de configuración de entorno (si los usas para almacenamiento de claves, etc.)
+.env
+appsettings.json
+
+# Archivos específicos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos generados de scripts
+Scripts/
+
+# Archivos generados por el sistema de control de versiones o IDE
+*~  # Archivos temporales
