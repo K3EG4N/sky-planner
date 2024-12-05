@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SkyPlanner.Context;
-using SkyPlanner.Entities;
 using SkyPlanner.Generics;
 using SkyPlanner.Helpers;
 using SkyPlanner.Services.Response;
