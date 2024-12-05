@@ -7,6 +7,7 @@
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public DateTime MemberShipDate { get; set; }
+        public ICollection<UserRole> UserRoles { get; set; }
         public bool IsActive { get; set; } = true;
     }
 }
