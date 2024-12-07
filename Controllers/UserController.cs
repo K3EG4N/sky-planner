@@ -30,24 +30,32 @@ namespace SkyPlanner.Controllers
 
 
             var users = await _dbContext.UserCredentials
-                                .Include(x => x.User)
+                                .Include(x => x.User.UserType)
                                 .Where(x => x.IsActive && x.User.IsActive)
                                 .ToListAsync();
 
+            var userRoles = await _dbContext.UserRoles
+                                    .Include(x => x.Role)
+                                    .ToListAsync();
+
             var query = from u in users
-                        orderby u.User.FirstName
+                        join ur in userRoles on u.UserId equals ur.UserId
+                        group ur.Role.Name by u into groupedRoles
+                        orderby groupedRoles.Key.User.FirstName
                         select new UserTableDTO
                         {
-                            UserId = u.UserId,
-                            FirstName = u.User.FirstName,
-                            LastName = u.User.LastName,
-                            Email = u.User.Email,
-                            UserName = u.UserName,
-                            MemberShipDate = _timeHelper.ConvertDateToString(u.User.MemberShipDate)
+                            UserId = groupedRoles.Key.UserId,
+                            UserType = groupedRoles.Key.User.UserType?.Name ?? "",
+                            FirstName = groupedRoles.Key.User.FirstName,
+                            LastName = groupedRoles.Key.User.LastName,
+                            Email = groupedRoles.Key.User.Email,
+                            UserName = groupedRoles.Key.UserName,
+                            MemberShipDate = _timeHelper.ConvertDateToString(groupedRoles.Key.User.MemberShipDate),
+                            Roles = [.. groupedRoles]
                         };
 
-            response.Total = query.Count();
             response.Data = query.ToList();
+            response.Total = query.Count();
 
             return response;
         }
