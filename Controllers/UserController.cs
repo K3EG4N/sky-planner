@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SkyPlanner.Context;
 using SkyPlanner.Generics;
 using SkyPlanner.Helpers;
-using SkyPlanner.Services.Response;
+using SkyPlanner.Services.Response.User;
 
 namespace SkyPlanner.Controllers
 {

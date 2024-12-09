@@ -1,4 +1,4 @@
-﻿namespace SkyPlanner.Services.Response
+﻿namespace SkyPlanner.Services.Response.User
 {
     public class UserTableDTO
     {

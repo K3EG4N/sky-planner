@@ -97,8 +97,11 @@ namespace SkyPlanner.Controllers
             }
 
             string generatePassword = string.Concat(body.Firstname.AsSpan(0, 2), body.Lastname.AsSpan(0, 3)) + DateTime.Now.Year;
+            Guid userType = (await _dbContext.UserTypes.FirstAsync(x => x.Code == USER_TYPE_ENUM.CLIENT)).UserTypeId;
 
             Guid newUserId = Guid.NewGuid();
+
+            Guid rolUser = (await _dbContext.Roles.FirstAsync(x => x.Code == ROLE_ENUM.USER)).RoleId;
 
             User newUser = new()
             {
@@ -106,7 +109,8 @@ namespace SkyPlanner.Controllers
                 Email = body.Email,
                 FirstName = body.Firstname,
                 LastName = body.Lastname,
-                MemberShipDate = DateTime.Now
+                MemberShipDate = DateTime.Now,
+                UserTypeId = userType,
             };
 
             UserCredential newCredential = new()
@@ -116,8 +120,11 @@ namespace SkyPlanner.Controllers
                 UserName = body.Email
             };
 
+            UserRole newRole = new() { RoleId = rolUser, UserId = newUserId, AssignedAt = DateTime.Now };
+
             await _dbContext.Users.AddAsync(newUser);
             await _dbContext.UserCredentials.AddAsync(newCredential);
+            await _dbContext.UserRoles.AddAsync(newRole);
             _dbContext.SaveChanges();
 
             response.Message = "User created";
