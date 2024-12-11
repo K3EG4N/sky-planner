@@ -10,6 +10,7 @@
         public int MaxSpeed { get; set; }
         public Guid AirlineId { get; set; }
         public Airline Airline { get; set; }
+        public string? Photo {  get; set; } 
         public bool IsActive { get; set; } = true;
     }
 }
